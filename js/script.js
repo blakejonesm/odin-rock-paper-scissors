@@ -25,9 +25,13 @@ function playerSelection() {
 function playRound(playerChoice, cpuChoice) {
     if (playerChoice == cpuChoice) {
         return "It's a draw!";
-    } else if ((playerChoice === "rock" && cpuChoice === "paper") || (playerChoice === "paper" && cpuChoice === "scissors") || (playerChoice === "scissors" && cpuChoice === "rock")) {
+    } else if ((playerChoice === "rock" && cpuChoice === "paper") ||
+               (playerChoice === "paper" && cpuChoice === "scissors") ||
+               (playerChoice === "scissors" && cpuChoice === "rock")) {
         return "You lose the round!";
-    } else if ((playerChoice === "rock" && cpuChoice === "scissors") || (playerChoice === "paper" && cpuChoice === "rock") || (playerChoice === "scissors" && cpuChoice === "paper")) {
+    } else if ((playerChoice === "rock" && cpuChoice === "scissors") ||
+               (playerChoice === "paper" && cpuChoice === "rock") ||
+               (playerChoice === "scissors" && cpuChoice === "paper")) {
         return "You win the round!";
     } else {
         return "Please refresh the page and enter a correct selection!"

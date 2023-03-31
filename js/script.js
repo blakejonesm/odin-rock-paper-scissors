@@ -13,6 +13,11 @@ function getComputerChoice() {
     return cpuChoice;
 }
 
-
+function playerSelection() {
+    let playerChoice = prompt("Select Rock, Paper or Scissors", "Rock").toLowerCase();
+    console.log(playerChoice);
+    return playerChoice;
+}
+playerSelection()
 
 getComputerChoice()

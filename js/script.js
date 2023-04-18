@@ -1,9 +1,10 @@
+// Game script
+
 playerChoice = playerSelection();
 cpuChoice = getComputerChoice();
 
 function getComputerChoice() {
     let randomNumber = Math.floor(Math.random() * 3);
-    console.log(randomNumber);
 
     if (randomNumber == 0) {
         cpuChoice = "rock";
@@ -21,11 +22,6 @@ function playerSelection() {
     console.log(playerChoice);
     return playerChoice;
 }
-
-function getComputerChoice() {
-    return choices[Math.floor(Math.random() * choices.length)];
-}
-console.log(cpuChoice);
 
 function playRound(playerChoice, cpuChoice) {
     if (playerChoice == cpuChoice) {

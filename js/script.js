@@ -3,16 +3,16 @@ const choices = ["rock", "paper", "scissors"]
 playerChoice = playerSelection();
 cpuChoice = getComputerChoice();
 
-function getComputerChoice() {
-    return choices[Math.floor(Math.random() * choices.length)];
-}
-console.log(cpuChoice);
-
 function playerSelection() {
     let playerChoice = prompt("Select Rock, Paper or Scissors", "Rock").toLowerCase();
     console.log(playerChoice);
     return playerChoice;
 }
+
+function getComputerChoice() {
+    return choices[Math.floor(Math.random() * choices.length)];
+}
+console.log(cpuChoice);
 
 function playRound(playerChoice, cpuChoice) {
     if (playerChoice == cpuChoice) {

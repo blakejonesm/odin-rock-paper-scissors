@@ -4,53 +4,65 @@ const playerPoints = document.querySelector('#playerScore');
 const computerPoints = document.querySelector('#computerScore');
 const resetBtn = document.querySelector('#reset');
 
-// Reset button
+// Restart button
 resetBtn.addEventListener('click',() => location.reload());
-
+  
 optionBtn.forEach(button => { button.addEventListener('click', getPlayerChoice) });
 
+let computerChoices = [{choice: 'Rock', value: 0}, {choice: 'Paper', value: 1}, {choice: 'Scissors', value: 2}];
 let playerScore = 0;
 let compScore = 0;
 let playerChoice;
-let computerChoices = [{choice: 'Rock', value: 0}, {choice: 'Paper', value: 1}, {choice: 'Scissors', value: 2}];
 
-playerChoice = playerSelection();
-cpuChoice = getComputerChoice();
+function computerPlay () {
+  let result = computerChoices[Math.floor(Math.random() * computerChoices.length)];
+  return result;
+}
 
-function getComputerChoice() {
-    let randomNumber = Math.floor(Math.random() * 3);
+function playRound (playerSelection, computerSelection) {
+  let roundWinCombo = `${playerSelection}-${computerSelection.value}`;
+  let playerWinCombo = ['1-0', '0-2', '2-1'];
 
-    if (randomNumber == 0) {
-        cpuChoice = "rock";
-    } else if (randomNumber == 1) {
-        cpuChoice = "paper";
-    } else {
-        cpuChoice = "scissors";
+    if (Number(playerSelection) === computerSelection.value) {
+      roundResults.textContent = "Tie!"
+    }else if (playerWinCombo.includes(roundWinCombo)) {
+        playerPoints.textContent = ++playerScore
+        roundResults.textContent = `You win! ${playerChoice} beats ${computerSelection.choice}`;
+    }else {
+        computerPoints.textContent = ++compScore
+        roundResults.textContent = `You lose! ${computerSelection.choice} beats ${playerChoice}`;
     }
-    console.log(cpuChoice);
-    return cpuChoice;
+ checkWinner();
 }
 
-function playerSelection() {
-    let playerChoice = prompt("Select Rock, Paper or Scissors", "Rock").toLowerCase();
-    console.log(playerChoice);
-    return playerChoice;
+const winnerResults ={
+  computer: ["You lose! Better luck next time!",],
+  player: ["You win!"],
+  tie: ["Tie game!"]
 }
 
-function playRound(playerChoice, cpuChoice) {
-    if (playerChoice == cpuChoice) {
-        return "It's a draw!";
-    } else if ((playerChoice === "rock" && cpuChoice === "paper") ||
-               (playerChoice === "paper" && cpuChoice === "scissors") ||
-               (playerChoice === "scissors" && cpuChoice === "rock")) {
-        return "You lose the round!";
-    } else if ((playerChoice === "rock" && cpuChoice === "scissors") ||
-               (playerChoice === "paper" && cpuChoice === "rock") ||
-               (playerChoice === "scissors" && cpuChoice === "paper")) {
-        return "You win the round!";
-    } else {
-        return "Please refresh the page and enter a correct selection!"
+function checkWinner() {
+  if (compScore === 5 || playerScore === 5) {
+    if (compScore === playerScore){
+      updateWinner('tie')
+    }else{
+      let win = `${(compScore > playerScore) ? 'computer' : 'player'}`;
+      updateWinner(win);
     }
+  }
 }
 
-console.log(playRound(playerChoice, cpuChoice));
+function updateWinner(winner){
+  roundResults.textContent = winnerResults[winner][0];
+  roundResults.style.color = winnerResults[winner][1];
+
+  optionBtn.forEach(button => {
+    button.removeEventListener('click', getPlayerChoice);
+  });
+}
+
+function getPlayerChoice(e) {
+  let playerSelection= (e.target.id);
+  playerChoice = e.target.textContent;
+  playRound(playerSelection, computerPlay());
+}

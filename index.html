@@ -10,11 +10,10 @@
 </head>
 <body>
     <header>
-        <h1>Rock Paper Scissors!</h1>
+        <h1>Rock Paper Scissors</h1>
     </header>
     <main>
         <div class="play-area">
-            <h2>First to 5 wins!</h2>
             <h3>Choose wisely!</h3>        
            
             <div class="optionBtn">
@@ -22,7 +21,13 @@
               <button id="1">Paper</button>
               <button id="2">Scissors</button>
             </div>
-        
+
+            <h4>First to 5 wins</h4>
+
+            <div><p id="results-label">Results</p></div>
+                    
+            <div id="roundResults"></div>
+
             <div class="score-titles">
               <p id="playerLabel">Player score</p>
               <p id="compLabel">Computer score</p>
@@ -32,10 +37,6 @@
               <div id="playerScore">0</div>
               <div id="computerScore">0</div>
             </div>
-        
-          <div><p id="results-label">Results</p></div>
-                    
-            <div id="roundResults"></div>
         
           <div>
             <button id="reset">Play Again!</button>
